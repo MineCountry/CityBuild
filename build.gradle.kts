@@ -30,11 +30,14 @@ dependencies {
     implementation("org.mariadb.jdbc:mariadb-java-client:3.3.2")
     implementation("de.chojo.sadu:sadu:1.4.1")
     implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
+    implementation("com.moandjiezana.toml:toml4j:0.7.2")
+    implementation("org.codehaus.plexus:plexus-utils:4.0.0")
 
     // Test dependencies
     testImplementation(platform("org.junit:junit-bom:5.10.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("com.github.seeseemelk:MockBukkit-v1.20:3.71.0")
+    testImplementation("org.mockito:mockito-core:5.10.0")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
