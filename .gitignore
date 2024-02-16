@@ -5,6 +5,8 @@ build/
 !**/src/test/**/build/
 *.env
 *.conf
+build.properties
+run
 
 ### IntelliJ IDEA ###
 .idea/
