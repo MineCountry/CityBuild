@@ -15,8 +15,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class CityBuildPlugin extends JavaPlugin {
 
     private Toml toml;
-    private PlayerCache playerCache;
     private PlayerRepository playerRepository;
+    private PlayerCache playerCache;
 
     @Override
     public void onLoad() {
@@ -29,8 +29,8 @@ public class CityBuildPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        playerCache = PlayerCache.getInstance();
         playerRepository = new PlayerRepository();
+        playerCache = PlayerCache.getInstance(playerRepository);
 
         registerListener();
         registerCommands();
@@ -38,7 +38,7 @@ public class CityBuildPlugin extends JavaPlugin {
 
     private void registerListener() {
         PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerEvents(new PlayerTrackingListener(playerRepository), this);
+        pluginManager.registerEvents(new PlayerTrackingListener(playerCache, playerRepository), this);
     }
 
     private void registerCommands() {

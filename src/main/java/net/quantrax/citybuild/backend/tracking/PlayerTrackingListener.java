@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 @RequiredArgsConstructor
 public class PlayerTrackingListener implements Listener {
 
-    private final PlayerCache cache = PlayerCache.getInstance();
+    private final PlayerCache cache;
     private final PlayerRepository repository;
 
     @EventHandler
