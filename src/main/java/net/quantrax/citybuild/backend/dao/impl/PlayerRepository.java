@@ -4,7 +4,6 @@ import de.chojo.sadu.wrapper.util.UpdateResult;
 import net.quantrax.citybuild.backend.dao.Repository;
 import net.quantrax.citybuild.global.CityBuildPlayer;
 import net.quantrax.citybuild.utils.Log;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
