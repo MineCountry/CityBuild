@@ -37,7 +37,7 @@ public class PlayerCache {
         cache.invalidate(player);
     }
 
-    public @Nullable CityBuildPlayer get(@NotNull Player player) {
+    public CityBuildPlayer get(@NotNull Player player) {
         return cache.getIfPresent(player);
     }
 }
