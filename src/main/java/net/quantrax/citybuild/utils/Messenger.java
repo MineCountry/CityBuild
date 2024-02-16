@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -35,9 +36,9 @@ public class Messenger {
     public static class MessengerBuilder {
 
         private final Toml toml;
-        private String message;
-        private CommandSender sender;
-        private List<Replacement<?>> replacements;
+        private String message = null;
+        private CommandSender sender = null;
+        private List<Replacement<?>> replacements = Collections.emptyList();
 
         public MessengerBuilder sender(@NotNull CommandSender sender) {
             this.sender = sender;
