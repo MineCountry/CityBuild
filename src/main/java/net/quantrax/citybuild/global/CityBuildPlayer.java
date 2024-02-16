@@ -33,19 +33,28 @@ public class CityBuildPlayer implements Entity<UUID> {
         return new CityBuildPlayer(row.getUuidFromString("uuid"));
     }
 
-    public void addCoins(int coins) {
-        Preconditions.state(coins >= 0, "Negative coins cannot be added");
+    public boolean addCoins(int coins) {
+        if (!(coins >= 0)) return false;
+
         this.coins += coins;
+        return true;
     }
 
-    public void removeCoins(int coins) {
-        Preconditions.state(coins >= 0, "Negative coins cannot be removed");
-        Preconditions.state(this.coins - coins >= 0, "The difference cannot be negative");
+    public boolean removeCoins(int coins) {
+        if (!(coins >= 0) || !(this.coins - coins >= 0)) return false;
+
         this.coins -= coins;
+        return true;
     }
 
-    public void setCoins(int coins) {
-        Preconditions.state(coins >= 0, "Coins cannot be negative");
+    public boolean setCoins(int coins) {
+        if (!(coins >= 0)) return false;
+
         this.coins = coins;
+        return true;
+    }
+
+    public void clearCoins() {
+        this.coins = 0;
     }
 }
