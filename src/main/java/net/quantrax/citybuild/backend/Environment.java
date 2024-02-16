@@ -4,19 +4,14 @@ import com.moandjiezana.toml.Toml;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.codehaus.plexus.util.FileUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStream;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.stream.Stream;
+import java.nio.file.StandardCopyOption;
 
 public final class Environment {
 
@@ -26,34 +21,23 @@ public final class Environment {
     }
 
     public static @Nullable Toml readConfig(@NotNull Plugin plugin) {
-        File file = new File(plugin.getDataFolder() + "/CityBuild/config.toml");
+        File file = new File(plugin.getDataFolder(), "/config.toml");
         return file.exists() ? new Toml().read(file) : null;
     }
 
-    public static void copyToml(@NotNull JavaPlugin plugin) {
-        URL url = Environment.class.getClassLoader().getResource("toml/");
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void copyConfig(@NotNull JavaPlugin plugin) {
+        try (InputStream inputStream = Environment.class.getClassLoader().getResourceAsStream("config.toml")) {
+            if (inputStream == null) throw new IllegalStateException("Cannot find config.toml");
 
-        if (url == null) throw new IllegalStateException("No toml files were found");
+            File dataFolder = plugin.getDataFolder();
+            if (!dataFolder.exists()) dataFolder.mkdirs();
 
-        List<File> files;
-        try (Stream<Path> fileStream = Files.walk(Paths.get(url.toURI()))) {
-            files = fileStream.filter(Files::isRegularFile)
-                    .map(Path::toFile)
-                    .toList();
+            File file = new File(dataFolder, "/config.toml");
+            if (!file.exists()) Files.copy(inputStream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-        } catch (IOException | URISyntaxException exception) {
-            throw new RuntimeException(exception);
+        } catch (IOException exception) {
+            throw new IllegalStateException(exception);
         }
-
-        if (files.isEmpty()) return;
-
-        files.forEach(file -> {
-            try {
-                FileUtils.copyFile(file, new File(plugin.getDataFolder() + "/CityBuild/" + file.getName()));
-
-            } catch (IOException exception) {
-                throw new RuntimeException(exception);
-            }
-        });
     }
 }
