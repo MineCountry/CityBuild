@@ -19,7 +19,7 @@ public class FeedCommand extends BaseCommand {
     @Description("Sättigt dich")
     public void onDefault(@NotNull Player player) {
         player.setFoodLevel(20);
-        Messenger.builder(toml).sender(player).message("feed.self").build().send();
+        Messenger.builder(toml).sender(player).message("essentials.feed-self").build().send();
     }
 
     @Subcommand("player")
@@ -28,14 +28,14 @@ public class FeedCommand extends BaseCommand {
     @Description("Sättigt einen anderen Spieler")
     public void onOther(@NotNull Player player, @Flags("other") @NotNull Player arg) {
         if (player.equals(arg)) {
-            Messenger.builder(toml).sender(player).message("feed.other-self").build().send();
+            Messenger.builder(toml).sender(player).message("essentials.feed-other-self").build().send();
             return;
         }
 
         arg.setFoodLevel(20);
 
-        Messenger.builder(toml).sender(player).message("feed.other").replacements(new Replacement<>("%target%", arg.getName())).build().send();
-        Messenger.builder(toml).sender(arg).message("feed.other-notify").replacements(new Replacement<>("%target%", player.getName())).build().send();
+        Messenger.builder(toml).sender(player).message("essentials.feed-other").replacements(new Replacement<>("%target%", arg.getName())).build().send();
+        Messenger.builder(toml).sender(arg).message("essentials.feed-other-notify").replacements(new Replacement<>("%target%", player.getName())).build().send();
     }
 
     @HelpCommand

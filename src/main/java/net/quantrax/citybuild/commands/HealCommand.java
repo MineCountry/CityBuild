@@ -19,7 +19,7 @@ public class HealCommand extends BaseCommand {
     public void onDefault(@NotNull Player player) {
         player.setHealthScale(20.0D);
         player.setFoodLevel(20);
-        Messenger.builder(toml).sender(player).message("heal.self").build().send();
+        Messenger.builder(toml).sender(player).message("essentials.heal-self").build().send();
     }
 
     @Subcommand("player")
@@ -28,15 +28,15 @@ public class HealCommand extends BaseCommand {
     @Description("Heilt einen anderen Spieler")
     public void onOther(@NotNull Player player, @Flags("other") @NotNull Player arg) {
         if (player.equals(arg)) {
-            Messenger.builder(toml).sender(player).message("heal.other-self").build().send();
+            Messenger.builder(toml).sender(player).message("essentials.heal-other-self").build().send();
             return;
         }
 
         arg.setHealthScale(20.0D);
         arg.setFoodLevel(20);
 
-        Messenger.builder(toml).sender(player).message("heal.other").replacements(new Messenger.Replacement<>("%target%", arg.getName())).build().send();
-        Messenger.builder(toml).sender(arg).message("heal.other-notify").replacements(new Messenger.Replacement<>("%target%", player.getName())).build().send();
+        Messenger.builder(toml).sender(player).message("essentials.heal-other").replacements(new Messenger.Replacement<>("%target%", arg.getName())).build().send();
+        Messenger.builder(toml).sender(arg).message("essentials.heal-other-notify").replacements(new Messenger.Replacement<>("%target%", player.getName())).build().send();
     }
 
     @HelpCommand
