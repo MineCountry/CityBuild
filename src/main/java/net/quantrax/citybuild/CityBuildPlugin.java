@@ -11,6 +11,7 @@ import net.quantrax.citybuild.backend.dao.impl.repository.PlayerRepository;
 import net.quantrax.citybuild.backend.tracking.PlayerTrackingListener;
 import net.quantrax.citybuild.commands.FarmworldCommand;
 import net.quantrax.citybuild.commands.MoneyCommand;
+import net.quantrax.citybuild.commands.NetherCommand;
 import net.quantrax.citybuild.commands.PayCommand;
 import net.quantrax.citybuild.utils.WorldLoader;
 import org.bukkit.Bukkit;
@@ -64,5 +65,6 @@ public class CityBuildPlugin extends JavaPlugin {
         commandManager.registerCommand(new MoneyCommand());
         commandManager.registerCommand(new PayCommand());
         commandManager.registerCommand(new FarmworldCommand());
+        commandManager.registerCommand(new NetherCommand());
     }
 }

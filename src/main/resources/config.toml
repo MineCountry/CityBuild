@@ -19,6 +19,10 @@
 
 no-spawn = "<grey>Es wurde <red>kein Spawn <grey>gefunden."
 
+[nether]
+spawn-name = "nether-spawn"
+teleport = "<grey>Du wurdest in das <red>Nether <grey>teleportiert."
+
 [farmworld]
 world = "farmwelt"
 spawn-name = "farmwelt-spawn"
