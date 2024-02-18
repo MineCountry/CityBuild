@@ -37,6 +37,7 @@ feed-self = "<grey>Du hast dich <red>gestättigt<gray>."
 feed-other = "<grey>Du hast <red>%target% <grey>gestättigt."
 feed-other-notify = "<grey>Du wurdest von <red>%target% <grey>gestättigt."
 feed-other-self = "<grey>Du kannst dich <red>nicht selbst <grey>sättigen."
+day = "<grey>Es ist nun <red>Tag<grey>."
 
 [money]
 balance-own = "<grey>Dein Kontostand beträgt <red>%balance%$<grey>."

@@ -65,5 +65,6 @@ public class CityBuildPlugin extends JavaPlugin {
         commandManager.registerCommand(new NetherCommand());
         commandManager.registerCommand(new FeedCommand());
         commandManager.registerCommand(new HealCommand());
+        commandManager.registerCommand(new DayCommand());
     }
 }
