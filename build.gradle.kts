@@ -105,7 +105,7 @@ bukkit {
     main = "net.quantrax.citybuild.CityBuildPlugin"
     apiVersion = "1.20"
     foliaSupported = false
-    load = BukkitPluginDescription.PluginLoadOrder.STARTUP
+    load = BukkitPluginDescription.PluginLoadOrder.POSTWORLD
     author = "ByTRYO"
     contributors = listOf("Merry", "GhostException", "DeRio_")
 }
