@@ -7,6 +7,7 @@ build/
 *.conf
 build.properties
 run
+TODO.md
 
 ### IntelliJ IDEA ###
 .idea/
