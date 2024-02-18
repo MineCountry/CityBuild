@@ -1,4 +1,4 @@
-package net.quantrax.citybuild.backend.dao.impl;
+package net.quantrax.citybuild.backend.dao.impl.repository;
 
 import de.chojo.sadu.wrapper.util.UpdateResult;
 import net.quantrax.citybuild.backend.dao.Repository;
@@ -7,7 +7,7 @@ import net.quantrax.citybuild.utils.Log;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -55,7 +55,7 @@ public class PlayerRepository implements Repository<CityBuildPlayer> {
     }
 
     @Override
-    public CompletableFuture<Collection<CityBuildPlayer>> findAll() {
+    public CompletableFuture<List<CityBuildPlayer>> findAll() {
         throw new UnsupportedOperationException();
     }
 
