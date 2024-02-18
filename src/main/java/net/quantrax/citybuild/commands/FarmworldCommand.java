@@ -4,7 +4,6 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import com.moandjiezana.toml.Toml;
-import net.quantrax.citybuild.CityBuildPlugin;
 import net.quantrax.citybuild.backend.cache.LocationCache;
 import net.quantrax.citybuild.utils.Messenger;
 import org.bukkit.Location;
@@ -15,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
 @CommandAlias("farmwelt")
 public class FarmworldCommand extends BaseCommand {
 
-    @Dependency CityBuildPlugin plugin;
     @Dependency private Toml toml;
     @Dependency private LocationCache cache;
 
@@ -35,6 +33,7 @@ public class FarmworldCommand extends BaseCommand {
     }
 
     @HelpCommand
+    @Syntax("<Page>")
     @Description("Zeigt diese UI")
     public void onHelp(@NotNull CommandHelp help) {
         help.showHelp();

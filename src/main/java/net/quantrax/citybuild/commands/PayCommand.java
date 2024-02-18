@@ -47,7 +47,7 @@ public class PayCommand extends BaseCommand {
     }
 
     @HelpCommand
-    @Syntax("<help>")
+    @Syntax("<Page>")
     @Description("Zeigt diese UI")
     public void onHelp(@NotNull CommandHelp help) {
         help.showHelp();
