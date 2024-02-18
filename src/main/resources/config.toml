@@ -28,6 +28,12 @@ world = "farmwelt"
 spawn-name = "farmwelt-spawn"
 teleport = "<grey>Du wurdest in die <red>Farmwelt <grey>teleportiert."
 
+[feed]
+self = "<grey>Du hast dich <red>gestättigt<gray>."
+other = "<grey>Du hast <red>%target% <grey>gestättigt."
+other-notify = "<grey>Du wurdest von <red>%target% <grey>gestättigt."
+other-self = "<grey>Du kannst dich <red>nicht selbst <grey>sättigen."
+
 [money]
 balance-own = "<grey>Dein Kontostand beträgt <red>%balance%$<grey>."
 balance-other = "<grey>Der Kontostand von <red>%target% <grey>beträgt <red>%balance%$<grey>."
