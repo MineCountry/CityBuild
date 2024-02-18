@@ -33,5 +33,4 @@ public class ComponentTranslator {
 
         return fromString(parsed);
     }
-
 }
