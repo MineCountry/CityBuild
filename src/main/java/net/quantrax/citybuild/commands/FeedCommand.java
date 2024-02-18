@@ -10,13 +10,13 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 @CommandAlias("feed")
-@CommandPermission("citybuild.command.heal")
+@CommandPermission("citybuild.command.feed")
 public class FeedCommand extends BaseCommand {
 
     @Dependency private Toml toml;
 
     @Default
-    @Description("Heilt dich")
+    @Description("Sättigt dich")
     public void onDefault(@NotNull Player player) {
         player.setFoodLevel(20);
         Messenger.builder(toml).sender(player).message("feed.self").build().send();
@@ -25,7 +25,7 @@ public class FeedCommand extends BaseCommand {
     @Subcommand("player")
     @Syntax("<Name>")
     @CommandCompletion("@players")
-    @Description("Heilt einen anderen Spieler")
+    @Description("Sättigt einen anderen Spieler")
     public void onOther(@NotNull Player player, @Flags("other") @NotNull Player arg) {
         if (player.equals(arg)) {
             Messenger.builder(toml).sender(player).message("feed.other-self").build().send();
