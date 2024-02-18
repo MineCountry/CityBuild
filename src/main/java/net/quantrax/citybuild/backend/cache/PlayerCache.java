@@ -4,12 +4,11 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import net.quantrax.citybuild.backend.dao.impl.PlayerRepository;
+import net.quantrax.citybuild.backend.dao.impl.repository.PlayerRepository;
 import net.quantrax.citybuild.global.CityBuildPlayer;
 import net.quantrax.citybuild.utils.Preconditions;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class PlayerCache {
