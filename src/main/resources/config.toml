@@ -34,6 +34,12 @@ other = "<grey>Du hast <red>%target% <grey>gestättigt."
 other-notify = "<grey>Du wurdest von <red>%target% <grey>gestättigt."
 other-self = "<grey>Du kannst dich <red>nicht selbst <grey>sättigen."
 
+[heal]
+self = "<grey>Du hast dich <red>geheilt<gray>."
+other = "<grey>Du hast <red>%target% <grey>geheilt."
+other-notify = "<grey>Du wurdest von <red>%target% <grey>geheilt."
+other-self = "<grey>Du kannst dich <red>nicht selbst <grey>heilen."
+
 [money]
 balance-own = "<grey>Dein Kontostand beträgt <red>%balance%$<grey>."
 balance-other = "<grey>Der Kontostand von <red>%target% <grey>beträgt <red>%balance%$<grey>."
