@@ -66,5 +66,6 @@ public class CityBuildPlugin extends JavaPlugin {
         commandManager.registerCommand(new FeedCommand());
         commandManager.registerCommand(new HealCommand());
         commandManager.registerCommand(new DayCommand());
+        commandManager.registerCommand(new FlyCommand());
     }
 }
