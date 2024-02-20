@@ -5,8 +5,10 @@ import com.moandjiezana.toml.Toml;
 import net.quantrax.citybuild.backend.Environment;
 import net.quantrax.citybuild.backend.StaticSaduLoader;
 import net.quantrax.citybuild.backend.cache.LocationCache;
+import net.quantrax.citybuild.backend.cache.MessageCache;
 import net.quantrax.citybuild.backend.cache.PlayerCache;
 import net.quantrax.citybuild.backend.dao.impl.repository.LocationRepository;
+import net.quantrax.citybuild.backend.dao.impl.repository.MessageRepository;
 import net.quantrax.citybuild.backend.dao.impl.repository.PlayerRepository;
 import net.quantrax.citybuild.backend.tracking.PlayerTrackingListener;
 import net.quantrax.citybuild.commands.*;
@@ -21,24 +23,29 @@ public class CityBuildPlugin extends JavaPlugin {
 
     private Toml toml;
     private PlayerRepository playerRepository;
+    private MessageRepository messageRepository;
     private PlayerCache playerCache;
     private LocationCache locationCache;
+    private MessageCache messageCache;
 
     @Override
     public void onLoad() {
         Environment.prepareSystem();
-        Environment.copyConfig(this);
         StaticSaduLoader.load();
 
-        toml = Environment.readConfig(this);
+        messageRepository = MessageRepository.getInstance();
+        Environment.clearUpMessages(messageRepository);
+
+        toml = Environment.createOrReadConfig(this);
     }
 
     @Override
     public void onEnable() {
-        WorldLoader.loadWorlds(toml.getString("farmworld.world"));
+        WorldLoader.loadWorlds(toml.getString("farmworld-name"));
 
         playerRepository = new PlayerRepository();
         playerCache = PlayerCache.getInstance(playerRepository);
+        messageCache = MessageCache.getInstance(messageRepository);
         locationCache = LocationCache.getInstance(new LocationRepository());
 
         registerListener();
@@ -58,6 +65,7 @@ public class CityBuildPlugin extends JavaPlugin {
         commandManager.registerDependency(Toml.class, toml);
         commandManager.registerDependency(PlayerCache.class, playerCache);
         commandManager.registerDependency(LocationCache.class, locationCache);
+        commandManager.registerDependency(MessageCache.class, messageCache);
 
         commandManager.registerCommand(new MoneyCommand());
         commandManager.registerCommand(new PayCommand());
