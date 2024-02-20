@@ -21,7 +21,7 @@ public final class MessageEntity {
         return new MessageEntity(row.getString("i18n"), row.getString("de"));
     }
 
-    @Contract("_ -> new")
+    @Contract("_, _ -> new")
     public static @NotNull MessageEntity create(@NotNull String key, @NotNull String value) {
         return new MessageEntity(key, value);
     }
