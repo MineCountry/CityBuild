@@ -36,8 +36,8 @@ public class HealCommand extends BaseCommand {
         arg.setHealthScale(20.0D);
         arg.setFoodLevel(20);
 
-        Messenger.builder(cache).sender(player).message("heal-other").replacements(new Messenger.Replacement<>("%target%", arg.getName())).build().send();
-        Messenger.builder(cache).sender(arg).message("heal-other-notify").replacements(new Messenger.Replacement<>("%target%", player.getName())).build().send();
+        Messenger.builder(cache).sender(player).message("heal-other").target(arg.getName()).build().send();
+        Messenger.builder(cache).sender(arg).message("heal-other-notify").target(arg.getName()).build().send();
     }
 
     @HelpCommand

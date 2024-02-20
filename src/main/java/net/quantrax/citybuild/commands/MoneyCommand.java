@@ -22,7 +22,7 @@ public class MoneyCommand extends BaseCommand {
     public void onDefault(Player player) {
         CityBuildPlayer cityBuildPlayer = playerCache.get(player);
 
-        Messenger.builder(messageCache).sender(player).message("balance-own").replacements(new Replacement<>("%balance%", cityBuildPlayer.coins())).build().send();
+        Messenger.builder(messageCache).sender(player).message("balance-own").balance(cityBuildPlayer.coins()).build().send();
     }
 
     @Subcommand("player")
@@ -33,7 +33,7 @@ public class MoneyCommand extends BaseCommand {
     public void onPlayer(@NotNull Player player, @Flags("other") Player arg) {
         CityBuildPlayer cityBuildPlayer = playerCache.get(arg);
 
-        Messenger.builder(messageCache).sender(player).message("balance-other").replacements(new Replacement<>("%balance%", cityBuildPlayer.coins()), new Replacement<>("%target%", arg.getName())).build().send();
+        Messenger.builder(messageCache).sender(player).message("balance-other").target(arg.getName()).balance(cityBuildPlayer.coins()).build().send();
     }
 
     @Subcommand("add")
@@ -51,7 +51,7 @@ public class MoneyCommand extends BaseCommand {
             return;
         }
 
-        Messenger.builder(messageCache).sender(player).message("add-success").replacements(new Replacement<>("%target%", arg.getName()), new Replacement<>("%amount%", value)).build().send();
+        Messenger.builder(messageCache).sender(player).message("add-success").target(arg.getName()).amount(value).build().send();
     }
 
     @Subcommand("remove")
@@ -69,7 +69,7 @@ public class MoneyCommand extends BaseCommand {
             return;
         }
 
-        Messenger.builder(messageCache).sender(player).message("remove-success").replacements(new Replacement<>("%target%", arg.getName()), new Replacement<>("%amount%", value)).build().send();
+        Messenger.builder(messageCache).sender(player).message("remove-success").target(arg.getName()).amount(value).build().send();
     }
 
     @Subcommand("set")
@@ -87,7 +87,7 @@ public class MoneyCommand extends BaseCommand {
             return;
         }
 
-        Messenger.builder(messageCache).sender(player).message("set-success").replacements(new Replacement<>("%target%", arg.getName()), new Replacement<>("%amount%", value)).build().send();
+        Messenger.builder(messageCache).sender(player).message("set-success").target(arg.getName()).amount(value).build().send();
     }
 
     @Subcommand("clear")
@@ -99,7 +99,7 @@ public class MoneyCommand extends BaseCommand {
         CityBuildPlayer cityBuildPlayer = playerCache.get(arg);
 
         cityBuildPlayer.clearCoins();
-        Messenger.builder(messageCache).sender(player).message("clear").replacements(new Replacement<>("%target%", arg.getName())).build().send();
+        Messenger.builder(messageCache).sender(player).message("clear").target(arg.getName()).build().send();
     }
 
     @HelpCommand

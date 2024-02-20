@@ -41,10 +41,10 @@ public class PayCommand extends BaseCommand {
         }
 
         payer.removeCoins(value);
-        Messenger.builder(messageCache).sender(player).message("pay-sender").replacements(new Replacement<>("%target%", arg.getName()), new Replacement<>("%amount%", value)).build().send();
+        Messenger.builder(messageCache).sender(player).message("pay-sender").target(arg.getName()).amount(value).build().send();
 
         receiver.addCoins(value);
-        Messenger.builder(messageCache).sender(arg).message("pay-receiver").replacements(new Replacement<>("%target%", arg.getName()), new Replacement<>("%amount%", value)).build().send();
+        Messenger.builder(messageCache).sender(arg).message("pay-receiver").target(arg.getName()).amount(value).build().send();
     }
 
     @HelpCommand

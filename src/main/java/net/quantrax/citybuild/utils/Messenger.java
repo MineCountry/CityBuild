@@ -50,6 +50,21 @@ public class Messenger {
             return this;
         }
 
+        public MessengerBuilder target(@NotNull String replacement) {
+            this.replacements.add(new Replacement<>("%target%", replacement));
+            return this;
+        }
+
+        public MessengerBuilder amount(int replacement) {
+            this.replacements.add(new Replacement<>("%amount%", replacement));
+            return this;
+        }
+
+        public MessengerBuilder balance(int replacement) {
+            this.replacements.add(new Replacement<>("%balance%", replacement));
+            return this;
+        }
+
         public MessengerBuilder replacements(Replacement<?>... replacements) {
             this.replacements = Arrays.asList(replacements);
             return this;

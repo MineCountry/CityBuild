@@ -28,15 +28,10 @@ public class FeedCommand extends BaseCommand {
     @CommandCompletion("@players")
     @Description("Sättigt einen anderen Spieler")
     public void onOther(@NotNull Player player, @Flags("other") @NotNull Player arg) {
-        if (player.equals(arg)) {
-            Messenger.builder(cache).sender(player).message("feed-other-self").build().send();
-            return;
-        }
-
         arg.setFoodLevel(20);
 
-        Messenger.builder(cache).sender(player).message("feed-other").replacements(new Replacement<>("%target%", arg.getName())).build().send();
-        Messenger.builder(cache).sender(arg).message("feed-other-notify").replacements(new Replacement<>("%target%", player.getName())).build().send();
+        Messenger.builder(cache).sender(player).message("feed-other").target(arg.getName()).build().send();
+        Messenger.builder(cache).sender(arg).message("feed-other-notify").target(arg.getName()).build().send();
     }
 
     @HelpCommand
