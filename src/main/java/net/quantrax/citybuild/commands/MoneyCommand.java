@@ -7,7 +7,6 @@ import net.quantrax.citybuild.backend.cache.MessageCache;
 import net.quantrax.citybuild.backend.cache.PlayerCache;
 import net.quantrax.citybuild.global.CityBuildPlayer;
 import net.quantrax.citybuild.utils.Messenger;
-import net.quantrax.citybuild.utils.Messenger.Replacement;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 

@@ -1,11 +1,9 @@
 package net.quantrax.citybuild.utils;
 
-import com.moandjiezana.toml.Toml;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.quantrax.citybuild.backend.cache.MessageCache;
-import net.quantrax.citybuild.backend.dao.impl.repository.MessageRepository;
 import net.quantrax.citybuild.utils.Messenger.Replacement;
 import org.jetbrains.annotations.NotNull;
 
