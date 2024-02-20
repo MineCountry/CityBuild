@@ -1,0 +1,53 @@
+#    _____ _ _         ____        _ _     _
+#  / ____(_) |       |  _ \      (_) |   | |
+# | |     _| |_ _   _| |_) |_   _ _| | __| |
+# | |    | | __| | | |  _ <| | | | | |/ _` |
+# | |____| | |_| |_| | |_) | |_| | | | (_| |
+#  \_____|_|\__|\__, |____/ \__,_|_|_|\__,_|
+#                __/ |
+#               |___/
+#
+# Current version: 1.0.0
+# Copyright (c) ByTRYO, Merry, GhostException and Knerio
+#
+# ======================================================================================================
+#
+# This config uses the minimessage format to style text. More about it can be found at
+# https://docs.advntr.dev/minimessage/index.html and https://webui.advntr.dev/ .
+#
+# ======================================================================================================
+
+no-spawn = "<grey>Es wurde <red>kein Spawn <grey>gefunden."
+
+[world]
+nether-teleport = "<grey>Du wurdest in das <red>Nether <grey>teleportiert."
+farmworld-teleport = "<grey>Du wurdest in die <red>Farmwelt <grey>teleportiert."
+
+[essentials]
+heal-self = "<grey>Du hast dich <red>geheilt<gray>."
+heal-other = "<grey>Du hast <red>%target% <grey>geheilt."
+heal-other-notify = "<grey>Du wurdest von <red>%target% <grey>geheilt."
+heal-other-self = "<grey>Du kannst dich <red>nicht selbst <grey>heilen."
+feed-self = "<grey>Du hast dich <red>gestättigt<gray>."
+feed-other = "<grey>Du hast <red>%target% <grey>gestättigt."
+feed-other-notify = "<grey>Du wurdest von <red>%target% <grey>gestättigt."
+feed-other-self = "<grey>Du kannst dich <red>nicht selbst <grey>sättigen."
+day = "<grey>Es ist nun <red>Tag<grey>."
+fly-allow = "<grey>Du kannst nun <red>fliegen<grey>."
+fly-disallow = "<grey>Du kannst nun <red>nicht <grey>mehr <red>fliegen<grey>."
+
+[money]
+balance-own = "<grey>Dein Kontostand beträgt <red>%balance%$<grey>."
+balance-other = "<grey>Der Kontostand von <red>%target% <grey>beträgt <red>%balance%$<grey>."
+add-success = "<grey>Du hast <red>%target% <grey>einen Betrag von <red>%amount% <grey>hinzugefügt."
+add-failure = "<grey>Der Betrag konnte <red>nicht <grey>hinzugefügt werden."
+remove-success = "<grey>Du hast <red>%target% <grey>einen Betrag von <red>%amount% <grey>entzogen."
+remove-failure = "<grey>Der Betrag konnte <red>nicht <grey>entfernt werden."
+set-success = "<grey>Du hast den Kontostand von <red>%target% <grey>auf einen Betrag von <red>%amount% <grey>gesetzt. "
+set-failure = "<grey>Der Betrag konnte <red>nicht <grey>gesetzt werden."
+clear = "<grey>Du hast das Konto von <red>%target% <grey>geleert."
+pay-sender = "<grey>Du hast <red>%target% <grey>einen Betrag von <red>%amount% <grey>überwiesen."
+pay-receiver = "<grey>Du hast von <red>%target% <grey>einen Betrag von <red>%amount% <grey>erhalten."
+pay-not-enough = "<grey>Du hast nicht genug <red>Guthaben<grey>."
+pay-self = "<grey>Du kanst <red>dir <grey>selbst <red>nichts <grey>überweisen."
+pay-failure = "<grey>Der Betrag konnte <red>nicht <grey>überwiesen werden."

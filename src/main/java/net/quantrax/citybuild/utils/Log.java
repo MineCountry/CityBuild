@@ -15,4 +15,9 @@ public final class Log {
     public static void severe(@FormatString @NotNull String template, Object... args) {
         LOGGER.severe(String.format(template, args));
     }
+
+    @FormatMethod
+    public static void info(@FormatString @NotNull String template, Object... args) {
+        LOGGER.info(String.format(template, args));
+    }
 }

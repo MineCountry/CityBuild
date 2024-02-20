@@ -38,7 +38,7 @@ public class ComponentTranslatorTest {
         String path = "without-replacement";
         Component expected = MiniMessage.miniMessage().deserialize("Hier existiert kein Replacement", TagResolver.standard());
 
-        Component result = ComponentTranslator.fromConfig(toml, path);
+        Component result = ComponentTranslator.fromDatabase(toml, path);
 
         assertEquals(expected, result);
     }

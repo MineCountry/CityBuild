@@ -4,6 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import com.moandjiezana.toml.Toml;
+import net.quantrax.citybuild.backend.cache.MessageCache;
 import net.quantrax.citybuild.utils.Messenger;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 @CommandPermission("citybuild.command.fly")
 public class FlyCommand extends BaseCommand {
 
-    @Dependency private Toml toml;
+    @Dependency private MessageCache cache;
 
     @Default
     @Description("Ändert deinen Flugstatus")
@@ -21,12 +22,12 @@ public class FlyCommand extends BaseCommand {
             player.setAllowFlight(false);
             player.setFlying(false);
 
-            Messenger.builder(toml).sender(player).message("essentials.fly-disallow").build().send();
+            Messenger.builder(cache).sender(player).message("fly-disallow").build().send();
             return;
         }
 
         player.setAllowFlight(true);
-        Messenger.builder(toml).sender(player).message("essentials.fly-allow").build().send();
+        Messenger.builder(cache).sender(player).message("fly-allow").build().send();
     }
 
     @HelpCommand

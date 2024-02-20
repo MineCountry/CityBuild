@@ -1,9 +1,9 @@
 package net.quantrax.citybuild.utils;
 
-import com.moandjiezana.toml.Toml;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import net.quantrax.citybuild.backend.cache.MessageCache;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -15,18 +15,18 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Messenger {
 
-    private Toml toml;
+    private MessageCache cache;
     private String message;
     private CommandSender sender;
     private List<Replacement<?>> replacements;
 
     @Contract(value = "_ -> new", pure = true)
-    public static @NotNull MessengerBuilder builder(@NotNull Toml toml) {
-        return new MessengerBuilder(toml);
+    public static @NotNull MessengerBuilder builder(@NotNull MessageCache cache) {
+        return new MessengerBuilder(cache);
     }
 
     public void send() {
-        sender.sendMessage(ComponentTranslator.withReplacements(toml, message, replacements));
+        sender.sendMessage(ComponentTranslator.withReplacements(cache, message, replacements));
     }
 
     public record Replacement<T>(@NotNull String placeholder, @NotNull T replacement) {
@@ -35,7 +35,7 @@ public class Messenger {
     @RequiredArgsConstructor
     public static class MessengerBuilder {
 
-        private final Toml toml;
+        private final MessageCache cache;
         private String message = null;
         private CommandSender sender = null;
         private List<Replacement<?>> replacements = Collections.emptyList();
@@ -56,7 +56,7 @@ public class Messenger {
         }
 
         public Messenger build() {
-            return new Messenger(toml, message, sender, replacements);
+            return new Messenger(cache, message, sender, replacements);
         }
     }
 }

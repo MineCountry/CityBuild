@@ -3,28 +3,26 @@ package net.quantrax.citybuild.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
-import com.moandjiezana.toml.Toml;
-import net.kyori.adventure.text.Component;
+import net.quantrax.citybuild.backend.cache.MessageCache;
 import net.quantrax.citybuild.backend.cache.PlayerCache;
 import net.quantrax.citybuild.global.CityBuildPlayer;
 import net.quantrax.citybuild.utils.Messenger;
 import net.quantrax.citybuild.utils.Messenger.Replacement;
-import net.quantrax.citybuild.utils.Preconditions;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 @CommandAlias("money")
 public class MoneyCommand extends BaseCommand {
 
-    @Dependency private Toml toml;
-    @Dependency private PlayerCache cache;
+    @Dependency private MessageCache messageCache;
+    @Dependency private PlayerCache playerCache;
 
     @Default
     @Description("Zeigt deinen aktuellen Kontostand")
     public void onDefault(Player player) {
-        CityBuildPlayer cityBuildPlayer = cache.get(player);
+        CityBuildPlayer cityBuildPlayer = playerCache.get(player);
 
-        Messenger.builder(toml).sender(player).message("money.balance-own").replacements(new Replacement<>("%balance%", cityBuildPlayer.coins())).build().send();
+        Messenger.builder(messageCache).sender(player).message("balance-own").replacements(new Replacement<>("%balance%", cityBuildPlayer.coins())).build().send();
     }
 
     @Subcommand("player")
@@ -33,9 +31,9 @@ public class MoneyCommand extends BaseCommand {
     @CommandPermission("citybuild.command.money")
     @Description("Zeigt den Kontostand eines anderen Spielers")
     public void onPlayer(@NotNull Player player, @Flags("other") Player arg) {
-        CityBuildPlayer cityBuildPlayer = cache.get(arg);
+        CityBuildPlayer cityBuildPlayer = playerCache.get(arg);
 
-        Messenger.builder(toml).sender(player).message("money.balance-other").replacements(new Replacement<>("%balance%", cityBuildPlayer.coins()), new Replacement<>("%target%", arg.getName())).build().send();
+        Messenger.builder(messageCache).sender(player).message("balance-other").replacements(new Replacement<>("%balance%", cityBuildPlayer.coins()), new Replacement<>("%target%", arg.getName())).build().send();
     }
 
     @Subcommand("add")
@@ -44,16 +42,16 @@ public class MoneyCommand extends BaseCommand {
     @CommandPermission("citybuild.command.money")
     @Description("Fügt einem Spieler einen Betrag hinzu")
     public void onMoneyAdd(@NotNull Player player, @Flags("other") Player arg, int value) {
-        CityBuildPlayer cityBuildPlayer = cache.get(arg);
+        CityBuildPlayer cityBuildPlayer = playerCache.get(arg);
 
         boolean successful = cityBuildPlayer.addCoins(value);
 
         if (!successful) {
-            Messenger.builder(toml).sender(player).message("money.add-failure").build().send();
+            Messenger.builder(messageCache).sender(player).message("add-failure").build().send();
             return;
         }
 
-        Messenger.builder(toml).sender(player).message("money.add-success").replacements(new Replacement<>("%target%", arg.getName()), new Replacement<>("%amount%", value)).build().send();
+        Messenger.builder(messageCache).sender(player).message("add-success").replacements(new Replacement<>("%target%", arg.getName()), new Replacement<>("%amount%", value)).build().send();
     }
 
     @Subcommand("remove")
@@ -62,16 +60,16 @@ public class MoneyCommand extends BaseCommand {
     @CommandCompletion("@players")
     @Description("Entfernt einen Spieler einen Betrag vom Konto")
     public void onMoneyRemove(Player player, @Flags("other") Player arg, int value) {
-        CityBuildPlayer cityBuildPlayer = cache.get(arg);
+        CityBuildPlayer cityBuildPlayer = playerCache.get(arg);
 
         boolean successful = cityBuildPlayer.removeCoins(value);
 
         if (!successful) {
-            Messenger.builder(toml).sender(player).message("money.remove-failure").build().send();
+            Messenger.builder(messageCache).sender(player).message("remove-failure").build().send();
             return;
         }
 
-        Messenger.builder(toml).sender(player).message("money.remove-success").replacements(new Replacement<>("%target%", arg.getName()), new Replacement<>("%amount%", value)).build().send();
+        Messenger.builder(messageCache).sender(player).message("remove-success").replacements(new Replacement<>("%target%", arg.getName()), new Replacement<>("%amount%", value)).build().send();
     }
 
     @Subcommand("set")
@@ -80,16 +78,16 @@ public class MoneyCommand extends BaseCommand {
     @CommandCompletion("@players")
     @Description("Setzt den Kontostand eines Spielers auf einen Betrag")
     public void onMoneySet(@NotNull Player player, @Flags("other") Player arg, int value) {
-        CityBuildPlayer cityBuildPlayer = cache.get(arg);
+        CityBuildPlayer cityBuildPlayer = playerCache.get(arg);
 
         boolean successful = cityBuildPlayer.setCoins(value);
 
         if (!successful) {
-            Messenger.builder(toml).sender(player).message("money.set-failure").build().send();
+            Messenger.builder(messageCache).sender(player).message("set-failure").build().send();
             return;
         }
 
-        Messenger.builder(toml).sender(player).message("money.set-success").replacements(new Replacement<>("%target%", arg.getName()), new Replacement<>("%amount%", value)).build().send();
+        Messenger.builder(messageCache).sender(player).message("set-success").replacements(new Replacement<>("%target%", arg.getName()), new Replacement<>("%amount%", value)).build().send();
     }
 
     @Subcommand("clear")
@@ -98,10 +96,10 @@ public class MoneyCommand extends BaseCommand {
     @CommandCompletion("@players")
     @Description("Leert den Kontostand eines Spielers")
     public void onClear(Player player, @Flags("other") Player arg) {
-        CityBuildPlayer cityBuildPlayer = cache.get(arg);
+        CityBuildPlayer cityBuildPlayer = playerCache.get(arg);
 
         cityBuildPlayer.clearCoins();
-        Messenger.builder(toml).sender(player).message("money.clear").replacements(new Replacement<>("%target%", arg.getName())).build().send();
+        Messenger.builder(messageCache).sender(player).message("clear").replacements(new Replacement<>("%target%", arg.getName())).build().send();
     }
 
     @HelpCommand
