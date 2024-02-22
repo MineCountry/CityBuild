@@ -35,6 +35,9 @@ day = "<grey>Es ist nun <red>Tag<grey>."
 fly-allow = "<grey>Du kannst nun <red>fliegen<grey>."
 fly-disallow = "<grey>Du kannst nun <red>nicht <grey>mehr <red>fliegen<grey>."
 invsee-inventory-name = "<grey>Inventar von <red>%target%"
+sign-by-at-date = "<grey>Signiert von <green>%target% <grey>am <yellow>%date%"
+sign-no-block = "<grey>Du musst einen <red>Block <grey>in der Haupthand halten."
+sign-success = "<grey>Du hast das Item <red>signiert<grey>."
 
 [money]
 balance-own = "<grey>Dein Kontostand beträgt <red>%balance%$<grey>."
