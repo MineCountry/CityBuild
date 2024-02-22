@@ -34,6 +34,7 @@ feed-other-notify = "<grey>Du wurdest von <red>%target% <grey>gestättigt."
 day = "<grey>Es ist nun <red>Tag<grey>."
 fly-allow = "<grey>Du kannst nun <red>fliegen<grey>."
 fly-disallow = "<grey>Du kannst nun <red>nicht <grey>mehr <red>fliegen<grey>."
+invsee-inventory-name = "<grey>Inventar von <red>%target%"
 
 [money]
 balance-own = "<grey>Dein Kontostand beträgt <red>%balance%$<grey>."
