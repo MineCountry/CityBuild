@@ -12,6 +12,7 @@ import net.quantrax.citybuild.backend.dao.impl.repository.MessageRepository;
 import net.quantrax.citybuild.backend.dao.impl.repository.PlayerRepository;
 import net.quantrax.citybuild.backend.tracking.PlayerTrackingListener;
 import net.quantrax.citybuild.commands.*;
+import net.quantrax.citybuild.listener.CustomInventoryListener;
 import net.quantrax.citybuild.utils.WorldLoader;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -55,6 +56,7 @@ public class CityBuildPlugin extends JavaPlugin {
     private void registerListener() {
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new PlayerTrackingListener(playerCache, playerRepository), this);
+        pluginManager.registerEvents(new CustomInventoryListener(), this);
     }
 
     private void registerCommands() {
@@ -75,5 +77,6 @@ public class CityBuildPlugin extends JavaPlugin {
         commandManager.registerCommand(new HealCommand());
         commandManager.registerCommand(new DayCommand());
         commandManager.registerCommand(new FlyCommand());
+        commandManager.registerCommand(new InvseeCommand());
     }
 }
