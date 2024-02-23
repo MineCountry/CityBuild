@@ -38,6 +38,17 @@ invsee-inventory-name = "<grey>Inventar von <red>%target%"
 sign-by-at-date = "<grey>Signiert von <green>%target% <grey>am <yellow>%date%"
 sign-no-block = "<grey>Du musst einen <red>Block <grey>in der Haupthand halten."
 sign-success = "<grey>Du hast das Item <red>signiert<grey>."
+teleport-success-to-player = "<grey> Erfolgreich zu <red>%target <grey>teleportiert."
+teleport-success-for-target = "<grey> Erfolgreich zu <red>%target <grey>teleportiert."
+teleport-send = "<grey>Teleport Anfrage erfolgreich an <red>%target% <grey>versendet."
+teleport-request = "<grey>Du hast eine Teleport Anfrage von <red>%target% <grey>erhalten."
+teleport-here-send = "<grey>Teleport-here Anfrage erfolgreich an <red>%target% <grey>versendet."
+teleport-here-request = "<grey>Du hast eine Teleport-here Anfrage von <red>%target% <grey>erhalten."
+teleport-deny = "<grey>Du hast erfolgreich die Teleport Anfrage <red>abgelehnt."
+teleport-deny-request = "<grey>Deine Teleport <red>Anfrage <grey>wurde <red>abgelehnt."
+teleport-accept = "<red>%target% <grey>hat die Teleport Anfrage <red>Akzeptiert."
+teleport-request-all = "<grey>Du hast erfolgreich eine Teleport Anfage <red>an alle Spieler <grey>versendet."
+
 
 [money]
 balance-own = "<grey>Dein Kontostand beträgt <red>%balance%$<grey>."
