@@ -3,6 +3,7 @@ package net.quantrax.citybuild.backend.cache;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import net.quantrax.citybuild.backend.dao.impl.repository.PlayerRepository;
 import net.quantrax.citybuild.global.CityBuildPlayer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerCacheTest {
 
+    private final PlayerRepository repository = new PlayerRepository();
+
     private PlayerMock player;
     private PlayerCache cache;
 
@@ -20,7 +23,7 @@ class PlayerCacheTest {
         ServerMock server = MockBukkit.mock();
 
         player = server.addPlayer();
-        cache = PlayerCache.getInstance();
+        cache = PlayerCache.getInstance(repository);
     }
 
     @AfterEach

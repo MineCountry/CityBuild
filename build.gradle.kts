@@ -19,6 +19,8 @@ repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://repo.quantrax.net/nexus/content/repositories/releases")
     maven("https://repo.aikar.co/content/groups/aikar/")
+    maven("https://repo.minebench.de/")
+    maven("https://repo.codemc.io/repository/maven-snapshots/")
 }
 
 dependencies {
@@ -35,6 +37,8 @@ dependencies {
     implementation("com.moandjiezana.toml:toml4j:0.7.2")
     implementation("org.codehaus.plexus:plexus-utils:4.0.0")
     implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
+    implementation("de.themoep:inventorygui:1.6.1-SNAPSHOT")
+    implementation("net.wesjd:anvilgui:1.9.2-SNAPSHOT")
 
     // Test dependencies
     testImplementation(platform("org.junit:junit-bom:5.10.2"))
@@ -84,7 +88,9 @@ tasks {
                 "com.github.ben-manes.caffeine" to "caffeine",
                 "com.moandjiezana" to "toml",
                 "org.codehaus.plexus" to "plexus",
-                "co.aikar" to "acf"
+                "co.aikar" to "acf",
+                "de.themoep" to "inventorygui",
+                "net.wesjd" to "anvilgui"
         )
         for ((pattern, name) in mapping) relocate(pattern, "${base}${name}")
     }
@@ -105,7 +111,7 @@ bukkit {
     main = "net.quantrax.citybuild.CityBuildPlugin"
     apiVersion = "1.20"
     foliaSupported = false
-    load = BukkitPluginDescription.PluginLoadOrder.STARTUP
+    load = BukkitPluginDescription.PluginLoadOrder.POSTWORLD
     author = "ByTRYO"
     contributors = listOf("Merry", "GhostException", "DeRio_")
 }

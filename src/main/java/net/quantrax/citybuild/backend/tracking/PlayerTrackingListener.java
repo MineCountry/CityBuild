@@ -2,7 +2,7 @@ package net.quantrax.citybuild.backend.tracking;
 
 import lombok.RequiredArgsConstructor;
 import net.quantrax.citybuild.backend.cache.PlayerCache;
-import net.quantrax.citybuild.backend.dao.impl.PlayerRepository;
+import net.quantrax.citybuild.backend.dao.impl.repository.PlayerRepository;
 import net.quantrax.citybuild.global.CityBuildPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
