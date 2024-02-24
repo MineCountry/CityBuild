@@ -12,6 +12,8 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
@@ -39,7 +41,7 @@ public final class Environment {
                 Files.copy(inputStream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             }
 
-            return new Toml().read(file);
+            return new Toml().read(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
 
         } catch (IOException exception) {
             throw new IllegalStateException(exception);
@@ -50,7 +52,7 @@ public final class Environment {
         try (InputStream inputStream = Environment.class.getClassLoader().getResourceAsStream("messages.toml")) {
             if (inputStream == null) throw new IllegalStateException("Cannot find messages.toml");
 
-            Map<String, Object> defaults = new Toml().read(inputStream).toMap();
+            Map<String, Object> defaults = new Toml().read(new InputStreamReader(inputStream, StandardCharsets.UTF_8)).toMap();
 
             repository.findAll().whenComplete((entities, $) -> {
                 addFreshMessages(entities, defaults, repository);
