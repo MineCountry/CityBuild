@@ -28,7 +28,7 @@ allow-redstone = "<grey>- <#AEFF00>Redstone wurde wieder aktiviert"
 no-restrictions = "<grey>- /"
 
 [world]
-nether-teleport = "<grey>Du wurdest in das <red>Nether <grey>teleportiert."
+nether-teleport = "<grey>Du wurdest in den <red>Nether <grey>teleportiert."
 farmworld-teleport = "<grey>Du wurdest in die <red>Farmwelt <grey>teleportiert."
 
 [essentials]
