@@ -18,6 +18,14 @@
 # ======================================================================================================
 
 no-spawn = "<grey>Es wurde <red>kein Spawn <grey>gefunden."
+single-line = "<grey><st>                                                                                                                          "
+
+[tps]
+warning = "<#FFFB00>Warnung: Die TPS (letzte 10s) liegt bei %value%."
+restrictions = "<grey>In Kraft getretene Maßnahmen:"
+disallow-redstone = "<grey>- <#FF0000>Redstone wurde vorübergehend deaktiviert"
+allow-redstone = "<grey>- <#AEFF00>Redstone wurde wieder aktiviert"
+no-restrictions = "<grey>- /"
 
 [world]
 nether-teleport = "<grey>Du wurdest in das <red>Nether <grey>teleportiert."
