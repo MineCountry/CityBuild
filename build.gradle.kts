@@ -21,11 +21,13 @@ repositories {
     maven("https://repo.aikar.co/content/groups/aikar/")
     maven("https://repo.minebench.de/")
     maven("https://repo.codemc.io/repository/maven-snapshots/")
+    maven("https://oss.sonatype.org/content/repositories/snapshots")
 }
 
 dependencies {
     // Dependencies that are available at runtime
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+    compileOnly("me.lucko:spark-api:0.1-SNAPSHOT")
 
     // Dependencies that have to be shadowed
     implementation("org.jetbrains:annotations:24.1.0")
@@ -114,4 +116,5 @@ bukkit {
     load = BukkitPluginDescription.PluginLoadOrder.POSTWORLD
     author = "ByTRYO"
     contributors = listOf("Merry", "GhostException", "DeRio_")
+    depend = listOf("spark")
 }
