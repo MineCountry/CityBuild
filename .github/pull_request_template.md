@@ -25,7 +25,7 @@ Nenne alle neu in dieser PR hinzugefügten Repositories im buildscript, indem du
 <br>
 
 ### Neu hinzugefügte Abhängigkeiten
-Liste hier alle neu in dieser PR hinzugefügten Abhängigkeiten auf. Nutze dafür das Formar _groupid:artifact:version_ <br>
+Liste hier alle neu in dieser PR hinzugefügten Abhängigkeiten auf. Nutze dafür das Format _groupid:artifact:version_ <br>
 - io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT
 - org.jetbrains:annotations:24.1.0
 - com.google.code.gson:gson:2.10.1
