@@ -12,6 +12,8 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
@@ -39,7 +41,7 @@ public final class Environment {
                 Files.copy(inputStream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             }
 
-            return new Toml().read(file);
+            return new Toml().read(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
 
         } catch (IOException exception) {
             throw new IllegalStateException(exception);
@@ -50,7 +52,7 @@ public final class Environment {
         try (InputStream inputStream = Environment.class.getClassLoader().getResourceAsStream("messages.toml")) {
             if (inputStream == null) throw new IllegalStateException("Cannot find messages.toml");
 
-            Map<String, Object> defaults = new Toml().read(inputStream).toMap();
+            Map<String, Object> defaults = new Toml().read(new InputStreamReader(inputStream, StandardCharsets.UTF_8)).toMap();
 
             repository.findAll().whenComplete((entities, $) -> {
                 addFreshMessages(entities, defaults, repository);
@@ -63,33 +65,23 @@ public final class Environment {
     }
 
     private static void addFreshMessages(@NotNull List<MessageEntity> actual, @NotNull Map<String, Object> defaults, @NotNull MessageRepository repository) {
-        int i = computeMap(actual, defaults, repository, 0);
-
-        if (i == 0) return;
-        Log.info("%s Add %s new %s to database", UPDATER_PREFIX, i, i == 1 ? "message" : "messages");
-    }
-
-    private static int computeMap(@NotNull List<MessageEntity> actual, @NotNull Map<String, Object> defaults, @NotNull MessageRepository repository, int i) {
         for (Entry<String, Object> entry : defaults.entrySet()) {
 
             if (entry.getValue() instanceof String value) {
-                if (computeValue(actual, entry.getKey(), value, repository)) i++;
+                computeValue(actual, entry.getKey(), value, repository);
                 continue;
             }
 
             @SuppressWarnings("unchecked") Map<String, Object> inner = (Map<String, Object>) entry.getValue();
-            computeMap(actual, inner, repository, i);
+            addFreshMessages(actual, inner, repository);
         }
-
-        return i;
     }
 
-    private static boolean computeValue(@NotNull List<MessageEntity> actual, String key, String value, MessageRepository repository) {
+    private static void computeValue(@NotNull List<MessageEntity> actual, String key, String value, MessageRepository repository) {
         Optional<MessageEntity> optional = findByName(actual, key);
-        if (optional.isPresent()) return false;
+        if (optional.isPresent()) return;
 
         repository.create(MessageEntity.create(key, value));
-        return true;
     }
 
     private static Optional<MessageEntity> findByName(@NotNull List<MessageEntity> entities, String name) {
