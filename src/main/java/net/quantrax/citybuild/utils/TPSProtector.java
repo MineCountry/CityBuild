@@ -27,7 +27,9 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class TPSProtector {
 
-    public static final double LIMIT_SHUTDOWN = 7.1D, LIMIT_ALLOW_REDSTONE = 10.1D, LIMIT_WARN = 15.1D;
+    public static final double LIMIT_SHUTDOWN = 7.1D,
+            LIMIT_ALLOW_REDSTONE = 10.1D,
+            LIMIT_WARN = 15.1D;
 
     private final ScheduledExecutorService threadPool = new ScheduledThreadPoolExecutor(3);
     @Getter @Setter private boolean allowRedstone = true;
