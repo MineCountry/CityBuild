@@ -65,10 +65,6 @@ public final class Environment {
     }
 
     private static void addFreshMessages(@NotNull List<MessageEntity> actual, @NotNull Map<String, Object> defaults, @NotNull MessageRepository repository) {
-        computeMap(actual, defaults, repository);
-    }
-
-    private static void computeMap(@NotNull List<MessageEntity> actual, @NotNull Map<String, Object> defaults, @NotNull MessageRepository repository) {
         for (Entry<String, Object> entry : defaults.entrySet()) {
 
             if (entry.getValue() instanceof String value) {
@@ -77,7 +73,7 @@ public final class Environment {
             }
 
             @SuppressWarnings("unchecked") Map<String, Object> inner = (Map<String, Object>) entry.getValue();
-            computeMap(actual, inner, repository);
+            addFreshMessages(actual, inner, repository);
         }
     }
 
