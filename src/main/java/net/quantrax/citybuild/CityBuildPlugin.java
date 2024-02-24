@@ -13,6 +13,8 @@ import net.quantrax.citybuild.backend.dao.impl.repository.PlayerRepository;
 import net.quantrax.citybuild.backend.tracking.PlayerTrackingListener;
 import net.quantrax.citybuild.commands.*;
 import net.quantrax.citybuild.listener.CustomInventoryListener;
+import net.quantrax.citybuild.listener.TPSProtectionListener;
+import net.quantrax.citybuild.utils.TPSProtector;
 import net.quantrax.citybuild.utils.WorldLoader;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -28,6 +30,8 @@ public class CityBuildPlugin extends JavaPlugin {
     private PlayerCache playerCache;
     private LocationCache locationCache;
     private MessageCache messageCache;
+
+    private TPSProtector tpsProtector;
 
     @Override
     public void onLoad() {
@@ -49,6 +53,9 @@ public class CityBuildPlugin extends JavaPlugin {
         messageCache = MessageCache.getInstance(messageRepository);
         locationCache = LocationCache.getInstance(new LocationRepository());
 
+        tpsProtector = new TPSProtector(this, messageCache);
+        tpsProtector.supervice();
+
         registerListener();
         registerCommands();
     }
@@ -57,6 +64,7 @@ public class CityBuildPlugin extends JavaPlugin {
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new PlayerTrackingListener(playerCache, playerRepository), this);
         pluginManager.registerEvents(new CustomInventoryListener(), this);
+        pluginManager.registerEvents(new TPSProtectionListener(tpsProtector), this);
     }
 
     private void registerCommands() {
