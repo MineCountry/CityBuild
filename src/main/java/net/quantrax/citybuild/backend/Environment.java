@@ -63,33 +63,27 @@ public final class Environment {
     }
 
     private static void addFreshMessages(@NotNull List<MessageEntity> actual, @NotNull Map<String, Object> defaults, @NotNull MessageRepository repository) {
-        int i = computeMap(actual, defaults, repository, 0);
-
-        if (i == 0) return;
-        Log.info("%s Add %s new %s to database", UPDATER_PREFIX, i, i == 1 ? "message" : "messages");
+        computeMap(actual, defaults, repository);
     }
 
-    private static int computeMap(@NotNull List<MessageEntity> actual, @NotNull Map<String, Object> defaults, @NotNull MessageRepository repository, int i) {
+    private static void computeMap(@NotNull List<MessageEntity> actual, @NotNull Map<String, Object> defaults, @NotNull MessageRepository repository) {
         for (Entry<String, Object> entry : defaults.entrySet()) {
 
             if (entry.getValue() instanceof String value) {
-                if (computeValue(actual, entry.getKey(), value, repository)) i++;
+                computeValue(actual, entry.getKey(), value, repository);
                 continue;
             }
 
             @SuppressWarnings("unchecked") Map<String, Object> inner = (Map<String, Object>) entry.getValue();
-            computeMap(actual, inner, repository, i);
+            computeMap(actual, inner, repository);
         }
-
-        return i;
     }
 
-    private static boolean computeValue(@NotNull List<MessageEntity> actual, String key, String value, MessageRepository repository) {
+    private static void computeValue(@NotNull List<MessageEntity> actual, String key, String value, MessageRepository repository) {
         Optional<MessageEntity> optional = findByName(actual, key);
-        if (optional.isPresent()) return false;
+        if (optional.isPresent()) return;
 
         repository.create(MessageEntity.create(key, value));
-        return true;
     }
 
     private static Optional<MessageEntity> findByName(@NotNull List<MessageEntity> entities, String name) {
