@@ -15,7 +15,7 @@ public class ComponentTranslator {
         return MiniMessage.miniMessage().deserialize(path, TagResolver.standard());
     }
 
-    public static @NotNull Component fromDatabase(@NotNull MessageCache cache, @NotNull String key) {
+    public static @NotNull Component fromCache(@NotNull MessageCache cache, @NotNull String key) {
         String input = cache.get(key);
         Preconditions.state(input != null, "Could not find %s in database", key);
 
@@ -23,7 +23,7 @@ public class ComponentTranslator {
     }
 
     public static @NotNull Component withReplacements(@NotNull MessageCache cache, @NotNull String key, @NotNull List<Replacement<?>> replacements) {
-        if (replacements.isEmpty()) return fromDatabase(cache, key);
+        if (replacements.isEmpty()) return fromCache(cache, key);
 
         String raw = cache.get(key);
         Preconditions.state(raw != null, "Could not find %s in config.toml", key);
