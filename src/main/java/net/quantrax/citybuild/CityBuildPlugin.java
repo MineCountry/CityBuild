@@ -13,6 +13,7 @@ import net.quantrax.citybuild.backend.dao.impl.repository.PlayerRepository;
 import net.quantrax.citybuild.backend.tracking.PlayerTrackingListener;
 import net.quantrax.citybuild.commands.*;
 import net.quantrax.citybuild.listener.CustomInventoryListener;
+import net.quantrax.citybuild.listener.ElevatorListener;
 import net.quantrax.citybuild.listener.TPSProtectionListener;
 import net.quantrax.citybuild.utils.TPSProtector;
 import net.quantrax.citybuild.utils.WorldLoader;
@@ -65,6 +66,7 @@ public class CityBuildPlugin extends JavaPlugin {
         pluginManager.registerEvents(new PlayerTrackingListener(playerCache, playerRepository), this);
         pluginManager.registerEvents(new CustomInventoryListener(), this);
         pluginManager.registerEvents(new TPSProtectionListener(tpsProtector), this);
+        pluginManager.registerEvents(new ElevatorListener(toml), this);
     }
 
     private void registerCommands() {
