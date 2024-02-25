@@ -20,4 +20,9 @@ public final class Log {
     public static void info(@FormatString @NotNull String template, Object... args) {
         LOGGER.info(String.format(template, args));
     }
+
+    @FormatMethod
+    public static void warn(@FormatString @NotNull String template, Object... args) {
+        LOGGER.warning(String.format(template, args));
+    }
 }
