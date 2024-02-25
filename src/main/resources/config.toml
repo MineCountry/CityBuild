@@ -12,6 +12,7 @@
 #
 # ======================================================================================================
 
+plotworld-name = "world"
 farmworld-name = "farmwelt"
 farmworld-spawn-name = "farmwelt-spawn"
 nether-spawn-name = "nether-spawn"
