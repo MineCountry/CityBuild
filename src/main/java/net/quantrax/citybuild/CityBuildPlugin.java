@@ -14,6 +14,7 @@ import net.quantrax.citybuild.backend.tracking.PlayerTrackingListener;
 import net.quantrax.citybuild.commands.*;
 import net.quantrax.citybuild.listener.CustomInventoryListener;
 import net.quantrax.citybuild.listener.TPSProtectionListener;
+import net.quantrax.citybuild.utils.ClearLag;
 import net.quantrax.citybuild.utils.TPSProtector;
 import net.quantrax.citybuild.utils.WorldLoader;
 import org.bukkit.Bukkit;
@@ -55,6 +56,8 @@ public class CityBuildPlugin extends JavaPlugin {
 
         tpsProtector = new TPSProtector(this, messageCache);
         tpsProtector.supervice();
+
+        new ClearLag(this, messageCache, toml).execute();
 
         registerListener();
         registerCommands();

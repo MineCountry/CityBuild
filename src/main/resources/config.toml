@@ -15,3 +15,4 @@
 farmworld-name = "farmwelt"
 farmworld-spawn-name = "farmwelt-spawn"
 nether-spawn-name = "nether-spawn"
+clearlag-period = 10 # timeunit is minutes

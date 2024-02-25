@@ -20,6 +20,11 @@
 no-spawn = "<grey>Es wurde <red>kein Spawn <grey>gefunden."
 single-line = "<grey><st>                                                                                                                          "
 
+[clearlag]
+countdown = "<red>Alle auf dem Boden liegenden Items werden in <dark_aqua>%value% <red>Sekunden gelöscht."
+countdown-last-second = "<red>Alle auf dem Boden liegenden Items werden in <dark_aqua>einer <red>Sekunde gelöscht."
+executed = "<red>Alle auf dem Boden liegenden Items wurden gelöscht."
+
 [tps]
 warning = "<#FFFB00>Warnung: Die TPS (letzte 10s) liegt bei %value%."
 restrictions = "<grey>In Kraft getretene Maßnahmen:"
