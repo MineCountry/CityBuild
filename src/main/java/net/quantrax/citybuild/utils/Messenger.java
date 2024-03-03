@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -38,7 +39,7 @@ public class Messenger {
         private final MessageCache cache;
         private String message = null;
         private CommandSender sender = null;
-        private List<Replacement<?>> replacements = Collections.emptyList();
+        private List<Replacement<?>> replacements = new ArrayList<>();
 
         public MessengerBuilder sender(@NotNull CommandSender sender) {
             this.sender = sender;
