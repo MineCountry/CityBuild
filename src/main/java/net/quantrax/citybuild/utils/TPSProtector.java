@@ -1,5 +1,9 @@
 package net.quantrax.citybuild.utils;
 
+import club.minnced.discord.webhook.WebhookClient;
+import club.minnced.discord.webhook.send.WebhookEmbed;
+import club.minnced.discord.webhook.send.WebhookEmbed.EmbedTitle;
+import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -9,7 +13,6 @@ import me.lucko.spark.api.statistic.types.DoubleStatistic;
 import net.kyori.adventure.text.Component;
 import net.quantrax.citybuild.CityBuildPlugin;
 import net.quantrax.citybuild.backend.cache.MessageCache;
-import net.quantrax.citybuild.utils.DiscordWebhook.EmbedObject;
 import net.quantrax.citybuild.utils.Messenger.Replacement;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -17,8 +20,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -57,9 +58,11 @@ public class TPSProtector {
             // Running relaxing tps logic
 
             if (tpsLast10Secs > LIMIT_WARN && sentWarn) {
-                DiscordWebhook webhook = new DiscordWebhook(System.getProperty("WEBHOOK_URL"));
-                webhook.addEmbed(new EmbedObject().title("TPS-Protection").description("TPS (letzte 10s) liegt wieder bei 15").color(Color.decode("#62FF00")));
-                executeWebhook(webhook);
+                executeWebhook(new WebhookEmbedBuilder()
+                        .setTitle(new EmbedTitle("TPS-Protection", null))
+                        .setDescription("TPS (letzte 10s) liegt wieder bei 15")
+                        .setColor(0x62FF00)
+                        .build());
 
                 sentWarn(false);
                 return;
@@ -78,9 +81,11 @@ public class TPSProtector {
                 Log.warn("TPS (last 10s) dropped below 15");
                 broadcast(1);
 
-                DiscordWebhook webhook = new DiscordWebhook(System.getProperty("WEBHOOK_URL"));
-                webhook.addEmbed(new EmbedObject().title("TPS-Protection").description("TPS (letzte 10s) ist unter 15 gefallen").color(Color.decode("#007BFF")));
-                executeWebhook(webhook);
+                executeWebhook(new WebhookEmbedBuilder()
+                        .setTitle(new EmbedTitle("TPS-Protection", null))
+                        .setDescription("TPS (letzte 10s) ist unter 15 gefallen")
+                        .setColor(0x007BFF)
+                        .build());
 
                 sentWarn(true);
                 return;
@@ -91,9 +96,11 @@ public class TPSProtector {
                 allowRedstone(false);
                 broadcast(2);
 
-                DiscordWebhook webhook = new DiscordWebhook(System.getProperty("WEBHOOK_URL"));
-                webhook.addEmbed(new EmbedObject().title("TPS-Protection").description("TPS (letzte 10s) ist unter 10 gefallen. Deaktiviere Redstone").color(Color.ORANGE));
-                executeWebhook(webhook);
+                executeWebhook(new WebhookEmbedBuilder()
+                        .setTitle(new EmbedTitle("TPS-Protection", null))
+                        .setDescription("TPS (letzte 10s) ist unter 10 gefallen. Deaktiviere Redstone")
+                        .setColor(0xFFC800)
+                        .build());
 
                 return;
             }
@@ -101,9 +108,11 @@ public class TPSProtector {
             if (tpsLast10Secs <= LIMIT_SHUTDOWN) {
                 Log.warn("TPS (last 10s) dropped below 7. Shutting down server..");
 
-                DiscordWebhook webhook = new DiscordWebhook(System.getProperty("WEBHOOK_URL"));
-                webhook.addEmbed(new EmbedObject().title("TPS-Protection").description("TPS (letzte 10s) ist unter 7 gefallen. Stoppe Server").color(Color.RED));
-                executeWebhook(webhook);
+                executeWebhook(new WebhookEmbedBuilder()
+                        .setTitle(new EmbedTitle("TPS-Protection", null))
+                        .setDescription("TPS (letzte 10s) ist unter 7 gefallen. Stoppe Server")
+                        .setColor(0xFF0000)
+                        .build());
 
                 Bukkit.getScheduler().runTaskLater(plugin, () -> Bukkit.getServer().shutdown(), 20L);
             }
@@ -115,11 +124,12 @@ public class TPSProtector {
         return (lookup <= min && lookup > max);
     }
 
-    private void executeWebhook(@NotNull DiscordWebhook webhook) {
-        try {
-            webhook.execute();
-        } catch (IOException exception) {
-            Log.severe("Executing discord webhook failed with an exception: %s", exception.getMessage());
+    private void executeWebhook(@NotNull WebhookEmbed embed) {
+        try (WebhookClient client = WebhookClient.withUrl(System.getProperty("WEBHOOK_URL"))) {
+            client.send(embed).exceptionally(throwable -> {
+                Log.severe("Executing webhook failed with an exception: %s", throwable.getMessage());
+                return null;
+            });
         }
     }
 
