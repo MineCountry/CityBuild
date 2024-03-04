@@ -1,4 +1,0 @@
-without-replacement = "Hier existiert kein Replacement"
-
-[section]
-with-replacement = "Hier giebt es zwei Replacements: a) %value1% und 2) %value2%"
