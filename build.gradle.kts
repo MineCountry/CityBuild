@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "net.quantrax"
-version = "1.0.0.0"
+version = "24.3.0.0" // Format of version is Year.Month.Release.Buildnumber
 
 repositories {
     mavenCentral()
