@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "net.quantrax"
-version = "1.0.0"
+version = "1.0.0.0"
 
 repositories {
     mavenCentral()
@@ -100,13 +100,31 @@ tasks {
     }
 
     build {
-        dependsOn(shadowJar)
+        dependsOn(":bumpVersion", shadowJar)
     }
 
     runServer {
         minecraftVersion("1.20.4")
         downloadPlugins {
             url("https://ci.lucko.me/job/spark/400/artifact/spark-bukkit/build/libs/spark-1.10.59-bukkit.jar")
+        }
+        dependsOn(":bumpVersion")
+    }
+
+    create("bumpVersion") {
+        val currentVersion: String? by project
+        doFirst {
+            println("Current version: $version")
+            val newVersion = takeIf { currentVersion.isNullOrBlank() }?.let {
+                val versions = version.toString().split(".")
+                "${versions[0]}.${versions[1]}.${versions[2]}.${versions.last().toInt().plus(1)}"
+            } ?: currentVersion
+
+            buildFile.readText().apply {
+                println("Bump version to $newVersion")
+                val content = replaceFirst("version = \"$version\"", "version = \"$newVersion\"")
+                buildFile.writeText(content)
+            }
         }
     }
 }
