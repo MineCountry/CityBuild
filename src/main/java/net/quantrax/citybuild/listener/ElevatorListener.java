@@ -83,6 +83,7 @@ public class ElevatorListener implements Listener {
     }
 
     private enum Direction {
-        UP, DOWN
+        UP, 
+        DOWN
     }
 }
