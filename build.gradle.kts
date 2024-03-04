@@ -93,7 +93,8 @@ tasks {
                 "org.codehaus.plexus" to "plexus",
                 "co.aikar" to "acf",
                 "de.themoep" to "inventorygui",
-                "net.wesjd" to "anvilgui"
+                "net.wesjd" to "anvilgui",
+                "club.minnced" to "discord.webhook"
         )
         for ((pattern, name) in mapping) relocate(pattern, "${base}${name}")
     }
