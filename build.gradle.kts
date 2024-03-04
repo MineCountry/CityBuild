@@ -41,6 +41,7 @@ dependencies {
     implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
     implementation("de.themoep:inventorygui:1.6.1-SNAPSHOT")
     implementation("net.wesjd:anvilgui:1.9.2-SNAPSHOT")
+    implementation("club.minnced:discord-webhooks:0.8.4")
 
     // Test dependencies
     testImplementation(platform("org.junit:junit-bom:5.10.2"))
