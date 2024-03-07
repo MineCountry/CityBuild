@@ -67,3 +67,13 @@ pay-receiver = "<grey>Du hast von <red>%target% <grey>einen Betrag von <red>%amo
 pay-not-enough = "<grey>Du hast nicht genug <red>Guthaben<grey>."
 pay-self = "<grey>Du kanst <red>dir <grey>selbst <red>nichts <grey>überweisen."
 pay-failure = "<grey>Der Betrag konnte <red>nicht <grey>überwiesen werden."
+
+[vanish]
+vanish-self-on = "<grey>Du bist nun im Vanish"
+vanish-self-off = "<grey>Du bist nun nicht mehr im Vanish"
+vanish-other-on = "<grey>Du hast <red>%target%</red> in den Vanish gesetzt"
+vanish-other-on-notify = "<grey>Du wurdest von <red>%target%</red> in den Vanish gesetzt"
+vanish-other-off = "<grey>Du hast <red>%target%</red> aus dem Vanish gesetzt"
+vanish-other-off-notify = "<grey>Du wurdest von <red>%target%</red> aus dem Vanish gesetzt"
+vanished-override-join-message = "<grey><red>%target%</red> is dem Spiel beigetreten"
+vanished-override-quit-message = "<grey><red>%target%</red> hast das Spiel verlassen"

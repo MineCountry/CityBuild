@@ -12,11 +12,7 @@ import net.quantrax.citybuild.backend.dao.impl.repository.MessageRepository;
 import net.quantrax.citybuild.backend.dao.impl.repository.PlayerRepository;
 import net.quantrax.citybuild.backend.tracking.PlayerTrackingListener;
 import net.quantrax.citybuild.commands.*;
-import net.quantrax.citybuild.listener.CoinSurveillanceListener;
-import net.quantrax.citybuild.listener.ChairListener;
-import net.quantrax.citybuild.listener.CustomInventoryListener;
-import net.quantrax.citybuild.listener.ElevatorListener;
-import net.quantrax.citybuild.listener.TPSProtectionListener;
+import net.quantrax.citybuild.listener.*;
 import net.quantrax.citybuild.utils.ClearLag;
 import net.quantrax.citybuild.utils.TPSProtector;
 import net.quantrax.citybuild.utils.WorldLoader;
@@ -74,6 +70,7 @@ public class CityBuildPlugin extends JavaPlugin {
         pluginManager.registerEvents(new ElevatorListener(toml), this);
         pluginManager.registerEvents(new CoinSurveillanceListener(toml), this);
         pluginManager.registerEvents(new ChairListener(this), this);
+        pluginManager.registerEvents(new VanishConnectionsListener(this), this);
     }
 
     private void registerCommands() {
@@ -96,5 +93,6 @@ public class CityBuildPlugin extends JavaPlugin {
         commandManager.registerCommand(new FlyCommand());
         commandManager.registerCommand(new InvseeCommand());
         commandManager.registerCommand(new SignCommand());
+        commandManager.registerCommand(new VanishCommand());
     }
 }
