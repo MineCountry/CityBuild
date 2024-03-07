@@ -93,6 +93,6 @@ public class CityBuildPlugin extends JavaPlugin {
         commandManager.registerCommand(new FlyCommand());
         commandManager.registerCommand(new InvseeCommand());
         commandManager.registerCommand(new SignCommand());
-        commandManager.registerCommand(new VanishCommand());
+        commandManager.registerCommand(new VanishCommand(this));
     }
 }
