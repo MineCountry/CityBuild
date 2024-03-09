@@ -46,7 +46,7 @@ public class VanishConnectionsListener implements Listener {
 
         event.quitMessage(Component.empty());
         Bukkit.getOnlinePlayers().stream()
-                .filter(all -> all.hasPermission(toml.getString("vanish-override-permission")))
+                .filter(all -> all.hasPermission("vanish.override"))
                 .forEach(player -> {
                     Messenger.builder(messageCache).sender(player).target(event.getPlayer().getName()).message("vanished-override-quit-message").build().send();
                 });

@@ -31,7 +31,7 @@ public class VanishManager {
     private MessageCache messageCache;
 
     public static VanishManager getInstance(CityBuildPlugin plugin) {
-        if (VanishManager.instance == null) return new VanishManager(plugin);
+        if (VanishManager.instance == null) VanishManager.instance = new VanishManager(plugin);
         return VanishManager.instance;
     }
 
@@ -59,7 +59,7 @@ public class VanishManager {
 
     public void vanishPlayerForAll(Player player) {
         Bukkit.getOnlinePlayers().stream()
-                .filter(all -> !all.hasPermission(toml.getString("vanish-override-permission")))
+                .filter(all -> !all.hasPermission("vanish.override"))
                 .forEach(all -> all.hidePlayer(this.plugin, player));
     }
 

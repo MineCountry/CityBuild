@@ -18,4 +18,3 @@ farmworld-spawn-name = "farmwelt-spawn"
 nether-spawn-name = "nether-spawn"
 clearlag-period = 10 # timeunit is minutes
 unrealistic-coins-limit = 100 # in milion
-vanish-override-permission = "vanish.override"
